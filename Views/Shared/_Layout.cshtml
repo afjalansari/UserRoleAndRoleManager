@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FleetMasterPro</title>
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <!-- Inline Styles for Theme -->
+    <style>
+        body[data-bs-theme="dark"] {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        nav[data-bs-theme="dark"], footer[data-bs-theme="dark"] {
+            background-color: #333333;
+            color: #bbbbbb;
+        }
+
+        .btn-toggle {
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary shadow" data-bs-theme="light">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white fw-bold" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-car-side"></i> FleetMasterPro
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex align-items-center">
+                        <div class="btn-toggle text-white ms-3" onclick="toggleTheme()">
+                            <i class="fas fa-moon"></i> Dark Mode
+                        </div>
+                        <partial name="_LoginPartial" />
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mt-4 flex-grow-1">
+        @RenderBody()
+    </main>
+
+    <footer class="bg-dark text-white py-3 mt-auto" data-bs-theme="light">
+        <div class="container text-center">
+            <small>
+                &copy; 2024 FleetMasterPro - All rights reserved |
+                <a class="text-decoration-none text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
+            </small>
+        </div>
+    </footer>
+
+    <!-- JavaScript Libraries -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        function toggleTheme() {
+            const root = document.documentElement;
+            const currentTheme = root.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+            root.setAttribute('data-bs-theme', newTheme);
+
+            const toggleButton = document.querySelector('.btn-toggle');
+            toggleButton.innerHTML = newTheme === 'dark'
+                ? '<i class="fas fa-sun"></i> Light Mode'
+                : '<i class="fas fa-moon"></i> Dark Mode';
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            const message = '@TempData["ToastMessage"]';
+            const type = '@TempData["ToastType"]';
+
+            if (message) {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    positionClass: "toast-top-right",
+                    timeOut: "5000",
+                };
+                toastr[type](message);
+            }
+        });
+    </script>
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

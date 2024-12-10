@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - FleetMasterPro Dashboard</title>
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+
+    <!-- Custom Styles -->
+    <style>
+        body[data-bs-theme="dark"] {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            color: #fff;
+            padding-top: 20px;
+            z-index: 1000;
+        }
+
+            .sidebar h3 {
+                font-weight: bold;
+                margin-bottom: 1rem;
+                text-align: center;
+            }
+
+            .sidebar a {
+                display: block;
+                color: #bbb;
+                text-decoration: none;
+                padding: 10px 20px;
+                font-size: 1rem;
+                transition: background 0.3s, color 0.3s;
+            }
+
+                .sidebar a:hover {
+                    background-color: #444;
+                    color: #fff;
+                }
+
+        .btn-toggle {
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s ease-in-out;
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            transition: margin-left 0.3s ease-in-out;
+        }
+
+        .card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+        }
+
+            .card:hover {
+                transform: scale(1.02);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            }
+
+        @@media (max-width: 768px) {
+            .sidebar
+
+        {
+            width: 100%;
+            height: auto;
+            position: static;
+        }
+
+        .content {
+            margin-left: 0;
+        }
+
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <!-- Sidebar -->
+    <nav class="sidebar" data-bs-theme="dark">
+        <h3>FleetMasterPro</h3>
+        <hr>
+        <a href="#" class="active"><i class="fas fa-home me-2"></i> Dashboard</a>
+        <a href="#"><i class="fas fa-car me-2"></i> Fleet Management</a>
+        <a href="#"><i class="fas fa-user me-2"></i> User Profiles</a>
+        <a href="#"><i class="fas fa-chart-line me-2"></i> Reports</a>
+        <a href="#"><i class="fas fa-cogs me-2"></i> Settings</a>
+        <hr>
+        <div class="btn-toggle text-center mt-3" onclick="toggleTheme()">
+            <i class="fas fa-moon"></i> Dark Mode
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content">
+        <header class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Dashboard</h1>
+            <div class="d-flex align-items-center">
+                <partial name="_LoginPartial" />
+            </div>
+        </header>
+        <main>
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        function toggleTheme() {
+            const root = document.documentElement;
+            const currentTheme = root.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+            root.setAttribute('data-bs-theme', newTheme);
+
+            const toggleButton = document.querySelector('.btn-toggle');
+            toggleButton.innerHTML = newTheme === 'dark'
+                ? '<i class="fas fa-sun"></i> Light Mode'
+                : '<i class="fas fa-moon"></i> Dark Mode';
+        }
+    </script>
+
+    <!-- User Count Update -->
+    <script>
+        function updateUserCount() {
+            fetch('/Dashboard/GetUserCount')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('userCount').textContent = `${data.count} Active Users`;
+                })
+                .catch(error => console.error('Error fetching user count:', error));
+        }
+
+        // Update user count every 10 seconds
+        setInterval(updateUserCount, 10000);
+
+        // Fetch initial count on page load
+        updateUserCount();
+    </script>
+</body>
+</html>

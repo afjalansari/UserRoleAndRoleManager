@@ -1,0 +1,164 @@
+﻿@* 
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+
+<!-- Dashboard Cards -->
+<div class="row g-3">
+    <div class="col-md-3">
+        <div class="card shadow-sm text-center bg-primary text-white">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-car"></i> Fleet</h5>
+                <p class="card-text">250 Vehicles</p>
+            </div>
+        </div>
+    </div>
+        <div class="col-md-3">
+            <div class="card shadow-sm text-center bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-users"></i> Users</h5>
+                    <p class="card-text" id="userCount">@ViewData["UserCount"] Active Users</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card shadow-sm text-center bg-warning text-dark">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-tools"></i> Maintenance</h5>
+                <p class="card-text">15 Pending Jobs</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card shadow-sm text-center bg-danger text-white">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-bell"></i> Alerts</h5>
+                <p class="card-text">8 New Alerts</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Additional Dashboard Content -->
+<div class="row g-3 mt-4">
+    <div class="col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h5 class="mb-0">Recent Activities</h5>
+            </div>
+            <div class="card-body">
+                <p>No recent activities available.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h5 class="mb-0">Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <button class="btn btn-primary btn-block w-100 mb-2">Add Vehicle</button>
+                <button class="btn btn-secondary btn-block w-100 mb-2">Generate Report</button>
+                <button class="btn btn-danger btn-block w-100">Raise Alert</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+ *@
+
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<!-- Dashboard Cards -->
+<div class="row g-3">
+    <!-- Fleet Card -->
+    <div class="col-md-3">
+        <div class="card shadow-sm text-center bg-primary text-white">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fas fa-car me-2"></i> Fleet
+                </h5>
+                <p class="card-text fs-5">250 Vehicles</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Users Card -->
+    <div class="col-md-3">
+        <div class="card shadow-sm text-center bg-success text-white">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fas fa-users me-2"></i> Users
+                </h5>
+                <p class="card-text fs-5" id="userCount">
+                    @ViewData["UserCount"] Active Users
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Maintenance Card -->
+    <div class="col-md-3">
+        <div class="card shadow-sm text-center bg-warning text-dark">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fas fa-tools me-2"></i> Maintenance
+                </h5>
+                <p class="card-text fs-5">15 Pending Jobs</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alerts Card -->
+    <div class="col-md-3">
+        <div class="card shadow-sm text-center bg-danger text-white">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fas fa-bell me-2"></i> Alerts
+                </h5>
+                <p class="card-text fs-5">8 New Alerts</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Additional Dashboard Content -->
+<div class="row g-3 mt-4">
+    <!-- Recent Activities -->
+    <div class="col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Recent Activities</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">No recent activities available.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="col-lg-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <button class="btn btn-primary w-100 mb-2">
+                    <i class="fas fa-plus-circle me-2"></i> Add Vehicle
+                </button>
+                <button class="btn btn-secondary w-100 mb-2">
+                    <i class="fas fa-file-alt me-2"></i> Generate Report
+                </button>
+                <button class="btn btn-danger w-100">
+                    <i class="fas fa-exclamation-circle me-2"></i> Raise Alert
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
